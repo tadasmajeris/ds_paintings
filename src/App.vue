@@ -15,10 +15,9 @@
           </div>
 
           <div class='menu-links'>
-            <a v-for='(menuLink, key) in menuLinks' :class='key' :title="menuLink.text"
-              @mouseover="menuLink.show=true" @mouseleave="menuLink.show=false" :href='menuLink.url' target="_blank">
-              {{key}}
-            </a>
+            <router-link v-for='(menuLink, key) in menuLinks' :class='key' :title="menuLink.text" :to="menuLink.path">
+              <span @mouseover="menuLink.show=true" @mouseleave="menuLink.show=false">{{key}}</span>
+            </router-link>
           </div>
         </header>
 
@@ -57,15 +56,18 @@ export default {
       menuLinks: {
         H: {
           show: false,
-          text: 'Home'
+          text: 'Home',
+          path: '/',
         },
         A: {
           show: false,
-          text: 'About'
+          text: 'About',
+          path: '/about',
         },
         B: {
           show: false,
-          text: 'Blog'
+          text: 'Blog',
+          path: '/blog',
         }
       }
     }
@@ -192,6 +194,10 @@ img.logo {
   font-size: 24px;
   line-height: 1.4;
   position: relative;
+  text-decoration: none;
+}
+.menu-links a span {
+  color: white;
 }
 
 .menu-links a.A {

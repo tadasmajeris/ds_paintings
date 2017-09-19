@@ -2,19 +2,30 @@
   <div class='outer'>
     <div class="inner">
       <div class='container'>
+
         <header>
           <img class='logo' src="https://dovilestrazdiene.files.wordpress.com/2017/09/cropped-avatar.jpeg">
-          <h1>Dovile Strazdiene Art</h1>
+          <h1 v-text='linkText'></h1>
 
           <div class='social-icons'>
-            <a class='fb' href='https://www.facebook.com/dstrazdiene/' target="_blank" title="DS Paintings Facebook"><img src="./assets/icons/fb.svg"></a>
-            <a class='in' href='https://www.instagram.com/dovilestrazdiene/' target="_blank" title="DS Paintings Instagram"><img src="./assets/icons/in.svg"></a>
-            <a class='tw' href='https://www.twitter.com/DSpaintings' target="_blank" title="DS Paintings Twitter"><img src="./assets/icons/tw.svg"></a>
+            <a v-for='(socialLink, key) in socialLinks' :class='key' :title="socialLink.text"
+              @mouseover="socialLink.show=true" @mouseleave="socialLink.show=false" :href='socialLink.url' target="_blank">
+              <img :src="'./static/icons/'+key+'.svg'">
+            </a>
+          </div>
+
+          <div class='menu-links'>
+            <a v-for='(menuLink, key) in menuLinks' :class='key' :title="menuLink.text"
+              @mouseover="menuLink.show=true" @mouseleave="menuLink.show=false" :href='menuLink.url' target="_blank">
+              {{key}}
+            </a>
           </div>
         </header>
+
         <main>
           <router-view></router-view>
         </main>
+
       </div>
     </div>
   </div>
@@ -22,7 +33,60 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+
+  data() {
+    return {
+      socialLinks: {
+        fb: {
+          show: false,
+          text: 'DS on Facebook',
+          url:  'https://www.facebook.com/dstrazdiene/',
+        },
+        in: {
+          show: false,
+          text: 'DS on Instagram',
+          url:  'https://www.instagram.com/dovilestrazdiene/',
+        },
+        tw: {
+          show: false,
+          text: 'DS on Twitter',
+          url:  'https://www.twitter.com/DSpaintings',
+        },
+      },
+      menuLinks: {
+        H: {
+          show: false,
+          text: 'Home'
+        },
+        A: {
+          show: false,
+          text: 'About'
+        },
+        B: {
+          show: false,
+          text: 'Blog'
+        }
+      }
+    }
+  },
+
+  computed: {
+    linkText() {
+      let linkText = 'Dovile Strazdiene Art';
+      for (var key in this.socialLinks) {
+        if (this.socialLinks[key].show) {
+          linkText = this.socialLinks[key].text;
+        }
+      }
+      for (var key in this.menuLinks) {
+        if (this.menuLinks[key].show) {
+          linkText = this.menuLinks[key].text;
+        }
+      }
+      return linkText;
+    }
+  }
 }
 </script>
 
@@ -54,12 +118,18 @@ body, html, .outer, .inner {
 }
 
 .container {
-  width: 500px;
-  margin: auto;
   text-align: center;
 }
 
 header {
+  padding: 15px;
+  width: 320px;
+  margin: auto;
+  position: relative;
+}
+
+main {
+  clear: both;
   padding: 15px;
 }
 
@@ -82,6 +152,11 @@ img.logo {
   font-size: 20px;
 }
 
+.social-icons {
+  position: absolute;
+  top: 36px;
+  left: -14px;
+}
 .social-icons img {
   width: 30px;
   height: 30px;
@@ -90,16 +165,43 @@ img.logo {
   position: relative;
 }
 .social-icons .fb {
-  top: -165px;
-  left: -69px;
+  left: 59px;
 }
 .social-icons .in {
-  top: -126px;
-  left: -109px;
+  top: 39px;
+  left: 20px;
 }
 .social-icons .tw {
-  top: -87px;
-  left: -136px;
+  top: 78px;
+}
+
+.menu-links {
+  position: absolute;
+  top: 36px;
+  right: -14px;
+}
+
+.menu-links a {
+  background: #332c33;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1.4;
+  position: relative;
+}
+
+.menu-links a.A {
+  top: 39px;
+  left: -22px;
+}
+
+.menu-links a.B {
+  top: 78px;
+  left: -60px;
 }
 
 </style>

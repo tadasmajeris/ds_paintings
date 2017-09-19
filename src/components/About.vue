@@ -26,10 +26,8 @@ export default {
   p {
     margin-top: 0;
     margin-bottom: 25px;
+    font-size: 20px;
+    font-family: 'Cookie', 'Dancing Script', cursive;
   }
 
-  section {
-    font-family: 'Dosis', sans-serif;
-    font-size: 14px;
-  }
 </style>

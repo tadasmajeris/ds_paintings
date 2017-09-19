@@ -135,7 +135,10 @@ header {
 main {
   clear: both;
   padding: 15px;
-  font-size: 20px;
+}
+main * {
+  font-family: 'Dosis', sans-serif;
+  font-size: 14px;
 }
 
 img.logo {

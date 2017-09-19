@@ -3,7 +3,7 @@
     <p>"Your wings are ready." - John Assaraf</p>
     <section>
       My name is Dovile Strazdiene and I do abstract art.<br />
-      I am also a wife, a mother of boy Tim, a cancer survivor and a positive soul. <br />
+      I am also a wife, a mother of a young boy Tim, a cancer survivor and a positive soul. <br />
       I love to create colorful paintings, read spiritual books, uplift and inspire others and I am a strong believer in miracles.<br />
       I am living with my lovely family in a beautiful city of Vilnius - the capital of Lithuania.
     </section>

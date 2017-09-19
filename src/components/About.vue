@@ -1,6 +1,12 @@
 <template>
   <div>
-    {{msg}}
+    <p>"Your wings are ready." - John Assaraf</p>
+    <section>
+      My name is Dovile Strazdiene and I do abstract art.<br />
+      I am also a wife, a mother of boy Tim, a cancer survivor and a positive soul. <br />
+      I love to create colorful paintings, read spiritual books, uplift and inspire others and I am a strong believer in miracles.<br />
+      I am living with my lovely family in a beautiful city of Vilnius - the capital of Lithuania.
+    </section>
   </div>
 </template>
 
@@ -9,7 +15,7 @@ export default {
   name: 'home',
   data () {
     return {
-      msg: 'Dovile Strazdiene BIO'
+      quote: ''
     }
   }
 }
@@ -17,6 +23,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  p {
+    margin-top: 0;
+    margin-bottom: 25px;
+  }
 
-
+  section {
+    font-family: 'Dosis', sans-serif;
+    font-size: 14px;
+  }
 </style>

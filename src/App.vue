@@ -66,15 +66,15 @@ export default {
         },
         R: {
           show: false,
-          name: 'About',
+          name: 'Reason',
           text: 'Reason',
-          path: '/about',
+          path: '/reason',
         },
         T: {
           show: false,
-          name: 'Blog',
+          name: 'Typings',
           text: 'Typings',
-          path: '/blog',
+          path: '/typings',
         }
       }
     }
@@ -95,7 +95,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Grand+Hotel|Cookie|Dancing+Script');
+@import url('https://fonts.googleapis.com/css?family=Dosis:400|Cookie|Dancing+Script');
 
 body, html, .outer, .inner {
   height: 100%;

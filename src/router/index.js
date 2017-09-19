@@ -14,13 +14,13 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'About',
+      path: '/reason',
+      name: 'Reason',
       component: About
     },
     {
-      path: '/blog',
-      name: 'Blog',
+      path: '/typings',
+      name: 'Typings',
       component: Blog
     },
   ]

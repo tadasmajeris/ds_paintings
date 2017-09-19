@@ -5,19 +5,23 @@
 
         <header>
           <img class='logo' src="https://dovilestrazdiene.files.wordpress.com/2017/09/cropped-avatar.jpeg">
-          <h1 v-text='linkText'></h1>
+          <h1 v-text='headerText'></h1>
 
           <div class='social-icons'>
-            <a v-for='(socialLink, key) in socialLinks' :class='key' :title="socialLink.text"
+            <a v-for='(socialLink, key) in socialLinks' :class='key' :key='key'
               @mouseover="socialLink.show=true" @mouseleave="socialLink.show=false" :href='socialLink.url' target="_blank">
+              <div class='hover-text' v-text='socialLink.text' v-show='socialLink.show'></div>
               <img :src="'./static/icons/'+key+'.svg'">
             </a>
           </div>
 
           <div class='menu-links'>
-            <router-link v-for='(menuLink, key) in menuLinks' :class='key' :title="menuLink.text" :to="menuLink.path">
-              <span @mouseover="menuLink.show=true" @mouseleave="menuLink.show=false">{{key}}</span>
-            </router-link>
+            <section v-for='(menuLink, key) in menuLinks' @mouseover="menuLink.show=true" @mouseleave="menuLink.show=false" :class='active(menuLink)'>
+              <router-link :class='key' :to="menuLink.path" :key='key'>
+                <span>{{key}}</span>
+                <div class='hover-text' v-text='menuLink.text' v-show='menuLink.show'></div>
+              </router-link>
+            </section>
           </div>
         </header>
 
@@ -54,19 +58,22 @@ export default {
         },
       },
       menuLinks: {
-        H: {
-          show: false,
-          text: 'Home',
-          path: '/',
-        },
         A: {
           show: false,
-          text: 'About',
+          name: 'Home',
+          text: 'Art',
+          path: '/',
+        },
+        R: {
+          show: false,
+          name: 'About',
+          text: 'Reason',
           path: '/about',
         },
-        B: {
+        T: {
           show: false,
-          text: 'Blog',
+          name: 'Blog',
+          text: 'Typings',
           path: '/blog',
         }
       }
@@ -74,19 +81,14 @@ export default {
   },
 
   computed: {
-    linkText() {
-      let linkText = 'Dovile Strazdiene Art';
-      for (var key in this.socialLinks) {
-        if (this.socialLinks[key].show) {
-          linkText = this.socialLinks[key].text;
-        }
-      }
-      for (var key in this.menuLinks) {
-        if (this.menuLinks[key].show) {
-          linkText = this.menuLinks[key].text;
-        }
-      }
-      return linkText;
+    headerText() {
+      return this.$route.name == 'Home' ? 'Dovile Strazdiene Art' : this.$route.name;
+    }
+  },
+
+  methods: {
+    active(item) {
+      return this.$route.name == item.name ? 'active' : '';
     }
   }
 }
@@ -133,6 +135,7 @@ header {
 main {
   clear: both;
   padding: 15px;
+  font-size: 20px;
 }
 
 img.logo {
@@ -149,10 +152,6 @@ img.logo {
   margin-bottom: -11px;
 }
 
-.container p {
-  margin: 35px 0;
-  font-size: 20px;
-}
 
 .social-icons {
   position: absolute;
@@ -165,6 +164,7 @@ img.logo {
 }
 .social-icons a {
   position: relative;
+  text-decoration: none;
 }
 .social-icons .fb {
   left: 59px;
@@ -175,14 +175,34 @@ img.logo {
 }
 .social-icons .tw {
   top: 78px;
+  left: -7px;
 }
+.social-icons .hover-text {
+  position: absolute;
+  top: -10px;
+  left: -93px;
+  width: 88px;
+  text-align: right;
+  font-size: 16px;
+}
+
 
 .menu-links {
   position: absolute;
   top: 36px;
-  right: -14px;
+  right: -13px;
 }
-
+.menu-links .hover-text {
+  position: absolute;
+  top: 5px;
+  left: 37px;
+  width: 60px;
+  text-align: left;
+  font-size: 16px;
+}
+.menu-links section {
+  float: left;
+}
 .menu-links a {
   background: #332c33;
   color: white;
@@ -191,7 +211,7 @@ img.logo {
   height: 30px;
   display: inline-block;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 23px;
   line-height: 1.4;
   position: relative;
   text-decoration: none;
@@ -199,15 +219,22 @@ img.logo {
 .menu-links a span {
   color: white;
 }
-
-.menu-links a.A {
+.menu-links a.R {
   top: 39px;
   left: -22px;
+  font-size: 22px;
 }
-
-.menu-links a.B {
+.menu-links a.T {
   top: 78px;
   left: -60px;
+  padding-right: 2px;
+  padding-top: 1px;
+}
+.menu-links a.T span {
+
+}
+.menu-links .active a span {
+  font-weight: bold;
 }
 
 </style>

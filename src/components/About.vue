@@ -29,5 +29,4 @@ export default {
     font-size: 20px;
     font-family: 'Cookie', 'Dancing Script', cursive;
   }
-
 </style>

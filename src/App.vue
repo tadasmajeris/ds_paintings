@@ -26,7 +26,7 @@
         </header>
 
         <main>
-          <router-view></router-view>
+          <router-view :posts='photoPosts'></router-view>
         </main>
 
       </div>
@@ -47,6 +47,7 @@ export default {
 
   data() {
     return {
+      posts: [],
       socialLinks: {
         fb: {
           show: false,
@@ -90,30 +91,26 @@ export default {
   created() {
     this.httpGet(tumblr.url, tumblr.key, res=>{
       console.log(res);
+      this.posts = res.posts;
     });
-    /*$.ajax({
-      type: 'GET',
-      url: tumblr.url,
-      data: {
-        api_key: tumblr.apiKey,
-        limit: limit * store.state.pageNum,
-        id: id,
-        reblog_info: reblogInfo,
-        notes_info: notesInfo,
-        format: 'html',
-        type: postType
-      },
-      dataType: 'jsonp',
-      timeout: 10000,
-      success: (res) => {
-
-      }
-    });*/
   },
 
   computed: {
     headerText() {
       return this.$route.name == 'Home' ? 'Dovile Strazdiene Art' : this.$route.name;
+    },
+    photoPosts() {
+      let photos = [];
+      this.posts.forEach(post=>{
+        if (post.type == 'photo') {
+          let obj = {};
+          obj.summary = post.summary;
+          obj.date = post.date;
+          obj.photos = post.photos[0];
+          photos.push(obj);
+        }
+      });
+      return photos;
     }
   },
 

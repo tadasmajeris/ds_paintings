@@ -35,6 +35,13 @@
 </template>
 
 <script>
+// tumblr api
+import config from './config.js';
+const tumblr = {
+  url: config.tumblrUrl,
+  key: config.apiKey
+};
+
 export default {
   name: 'app',
 
@@ -80,6 +87,30 @@ export default {
     }
   },
 
+  created() {
+    this.httpGet(tumblr.url, tumblr.key, res=>{
+      console.log(res);
+    });
+    /*$.ajax({
+      type: 'GET',
+      url: tumblr.url,
+      data: {
+        api_key: tumblr.apiKey,
+        limit: limit * store.state.pageNum,
+        id: id,
+        reblog_info: reblogInfo,
+        notes_info: notesInfo,
+        format: 'html',
+        type: postType
+      },
+      dataType: 'jsonp',
+      timeout: 10000,
+      success: (res) => {
+
+      }
+    });*/
+  },
+
   computed: {
     headerText() {
       return this.$route.name == 'Home' ? 'Dovile Strazdiene Art' : this.$route.name;
@@ -89,13 +120,27 @@ export default {
   methods: {
     active(item) {
       return this.$route.name == item.name ? 'active' : '';
+    },
+    httpGet(url, key, callback) {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4) {
+          let response = JSON.parse(xmlHttp.responseText).response;
+          callback(response);
+        }
+      }
+
+      url += key ? '?api_key=' + key : '';
+
+      xmlHttp.open("GET", url, true); // true for asynchronous
+      xmlHttp.send(null);
     }
   }
 }
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Dosis:400|Cookie|Dancing+Script');
+@import url('https://fonts.googleapis.com/css?family=Dosis:400|Cookie');
 
 body, html, .outer, .inner {
   height: 100%;
@@ -105,7 +150,7 @@ body, html, .outer, .inner {
 }
 
 * {
-  font-family: 'Cookie', 'Dancing Script', cursive;
+  font-family: 'Cookie', cursive;
   box-sizing: border-box;
   color: #332c33;
   -webkit-font-smoothing: antialiased;

@@ -173,6 +173,7 @@ header {
   padding: 15px;
   width: 320px;
   margin: auto;
+  margin-bottom: 15px;
   position: relative;
 }
 
@@ -182,7 +183,7 @@ main {
 }
 main * {
   font-family: 'Dosis', sans-serif;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 img.logo {
@@ -226,11 +227,14 @@ img.logo {
 }
 .social-icons .hover-text {
   position: absolute;
-  top: -10px;
-  left: -93px;
-  width: 88px;
+  top: -13px;
+  left: -124px;
+  width: 120px;
   text-align: right;
-  font-size: 16px;
+  font-size: 20px;
+}
+.social-icons .fb .hover-text {
+  left: -125px;
 }
 
 
@@ -241,11 +245,11 @@ img.logo {
 }
 .menu-links .hover-text {
   position: absolute;
-  top: 5px;
+  top: 1px;
   left: 37px;
   width: 60px;
   text-align: left;
-  font-size: 16px;
+  font-size: 20px;
 }
 .menu-links section {
   float: left;

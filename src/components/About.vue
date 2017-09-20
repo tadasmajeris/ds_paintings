@@ -26,7 +26,7 @@ export default {
   p {
     margin-top: 0;
     margin-bottom: 25px;
-    font-size: 20px;
+    font-size: 21px;
     font-family: 'Cookie', 'Dancing Script', cursive;
   }
 </style>

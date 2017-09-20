@@ -25,6 +25,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
+article {
+  width: 250px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+article img {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  article {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
 </style>

@@ -5,7 +5,7 @@
 
         <header>
           <img class='logo' src="https://dovilestrazdiene.files.wordpress.com/2017/09/cropped-avatar.jpeg">
-          <h1 v-text='headerText'></h1>
+          <h1 v-if='headerText' v-text='headerText'></h1>
 
           <div class='social-icons'>
             <a v-for='(socialLink, key) in socialLinks' :class='key' :key='key'
@@ -26,7 +26,9 @@
         </header>
 
         <main>
-          <router-view :posts='photoPosts'></router-view>
+          <transition name="fade">
+            <router-view :posts='photoPosts'></router-view>
+          </transition>
         </main>
 
       </div>
@@ -282,4 +284,18 @@ img.logo {
   font-weight: bold;
 }
 
+
+/* transitions */
+.fade-enter-active, .fade-leave-active {
+  transition-property: opacity;
+  transition-duration: .25s;
+}
+
+.fade-enter-active {
+  transition-delay: .25s;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
 </style>

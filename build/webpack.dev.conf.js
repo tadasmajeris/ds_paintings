@@ -12,28 +12,14 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 })
 
 module.exports = merge(baseWebpackConfig, {
-  entry: 'index',
-  output: {
-    path: path.join(__dirname, 'scripts'),
-    filename: 'bundle.js'
-  },
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap }),
-    loaders: [
-      { test: /\.json$/, loader: 'json-loader' }
-    ]
+    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
   },
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
   plugins: [
     new webpack.DefinePlugin({
       'process.env': config.dev.env
-    }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jquery: 'jquery',
-      'window.jQuery': 'jquery',
-      jQuery: 'jquery'
     }),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
@@ -45,14 +31,5 @@ module.exports = merge(baseWebpackConfig, {
       inject: true
     }),
     new FriendlyErrorsPlugin()
-  ],
-  resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.js']
-  },
-  node: {
-    console: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  }
+  ]
 })

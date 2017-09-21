@@ -34,7 +34,7 @@
 
           <main>
             <transition name="fade">
-              <router-view :posts='photoPosts' :description='description'></router-view>
+              <router-view :posts='photoPosts' :blog-posts='blogPosts' :description='description'></router-view>
             </transition>
           </main>
 
@@ -102,7 +102,6 @@ export default {
 
   created() {
     this.httpGet(tumblr.url, tumblr.key, res=>{
-      /*console.log(res);*/
       this.posts = res.posts;
       this.description = res.blog.description;
     });
@@ -113,23 +112,31 @@ export default {
       return this.$route.name == 'Home' ? 'Dovile Strazdiene Art' : this.$route.name;
     },
     photoPosts() {
-      let photos = [];
-      this.posts.forEach(post=>{
-        if (post.type == 'photo') {
-          let obj = {};
-          obj.summary = post.summary;
-          obj.date = post.date;
-          obj.photos = post.photos[0];
-          photos.push(obj);
-        }
-      });
-      return photos;
+      return this.getBlogPosts('photo');
+    },
+    blogPosts() {
+      return this.getBlogPosts('text');
     }
   },
 
   methods: {
     active(item) {
       return this.$route.name == item.name ? 'active' : '';
+    },
+    getBlogPosts(type) {
+      let posts = [];
+      this.posts.forEach(post=>{
+        if (post.type == type) {
+          let obj = {};
+          obj.summary = post.summary;
+          obj.date = post.date;
+          obj.title = post.title;
+          obj.body = post.body;
+          obj.photos = post.photos ? post.photos[0] : null;
+          posts.push(obj);
+        }
+      });
+      return posts;
     },
     httpGet(url, key, callback) {
       var xmlHttp = new XMLHttpRequest();
@@ -297,7 +304,10 @@ img.logo {
 .menu-links .active a span {
   font-weight: bold;
 }
-
+article p {
+  -webkit-margin-before: 0.6em !important;
+  -webkit-margin-after: 0.2em !important;
+}
 
 /* transitions */
 .fade-enter-active, .fade-leave-active {
@@ -309,7 +319,7 @@ img.logo {
   transition-delay: .25s;
 }
 
-.fadePhoto-enter, .fadePhoto-leave-active {
+.fade-enter, .fade-leave-active {
   opacity: 0
 }
 

@@ -12,7 +12,7 @@
     <p>visit my shop at <a href='https://society6.com/dspaintings' target="_blank">society6.com/dspaintings</a></p>
     <p>or say hi at <a href='mailto:dovailira@gmail.com'>dovailira@gmail.com</a></p>
     <article v-for='post in posts' class='animated fadeIn' @click='clickPost(post)'>
-      <img :src="post.photos.alt_sizes[4].url"/><br />
+      <img :src="post.photos.alt_sizes[2].url"/><br />
       <u v-text="post.summary"></u>
     </article>
   </div>

@@ -184,7 +184,6 @@ header {
   padding: 15px;
   width: 320px;
   margin: auto;
-  margin-bottom: 15px;
   position: relative;
 }
 

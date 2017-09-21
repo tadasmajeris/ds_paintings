@@ -102,7 +102,7 @@ export default {
 
   created() {
     this.httpGet(tumblr.url, tumblr.key, res=>{
-      console.log(res);
+      /*console.log(res);*/
       this.posts = res.posts;
       this.description = res.blog.description;
     });
@@ -309,7 +309,16 @@ img.logo {
   transition-delay: .25s;
 }
 
-.fade-enter, .fade-leave-active {
+.fadePhoto-enter, .fadePhoto-leave-active {
+  opacity: 0
+}
+
+.fadePhoto-enter-active, .fadePhoto-leave-active {
+  transition-property: opacity;
+  transition-duration: .2s;
+}
+
+.fadePhoto-enter, .fadePhoto-leave-active {
   opacity: 0
 }
 

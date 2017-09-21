@@ -1,37 +1,46 @@
 <template>
   <div class='outer'>
     <div class="inner">
-      <div class='container'>
 
-        <header>
-          <img class='logo' src="https://dovilestrazdiene.files.wordpress.com/2017/09/cropped-avatar.jpeg">
-          <h1 v-if='headerText' v-text='headerText'></h1>
+      <transition
+        appear mode="out-in"
+        appear-class="invisible"
+        appear-to-class="animated fadeIn"
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut">
+        <div class='container'>
 
-          <div class='social-icons'>
-            <a v-for='(socialLink, key) in socialLinks' :class='key' :key='key'
-              @mouseover="socialLink.show=true" @mouseleave="socialLink.show=false" :href='socialLink.url' target="_blank">
-              <div class='hover-text' v-text='socialLink.text' v-show='socialLink.show'></div>
-              <img :src="'./static/icons/'+key+'.svg'">
-            </a>
-          </div>
+          <header>
+            <img class='logo' src="https://dovilestrazdiene.files.wordpress.com/2017/09/cropped-avatar.jpeg">
+            <h1 v-if='headerText' v-text='headerText'></h1>
 
-          <div class='menu-links'>
-            <section v-for='(menuLink, key) in menuLinks' @mouseover="menuLink.show=true" @mouseleave="menuLink.show=false" :class='active(menuLink)'>
-              <router-link :class='key' :to="menuLink.path" :key='key'>
-                <span>{{key}}</span>
-                <div class='hover-text' v-text='menuLink.text' v-show='menuLink.show'></div>
-              </router-link>
-            </section>
-          </div>
-        </header>
+            <div class='social-icons'>
+              <a v-for='(socialLink, key) in socialLinks' :class='key' :key='key'
+                @mouseover="socialLink.show=true" @mouseleave="socialLink.show=false" :href='socialLink.url' target="_blank">
+                <div class='hover-text' v-text='socialLink.text' v-show='socialLink.show'></div>
+                <img :src="'./static/icons/'+key+'.svg'">
+              </a>
+            </div>
 
-        <main>
-          <transition name="fade">
-            <router-view :posts='photoPosts'></router-view>
-          </transition>
-        </main>
+            <div class='menu-links'>
+              <section v-for='(menuLink, key) in menuLinks' @mouseover="menuLink.show=true" @mouseleave="menuLink.show=false" :class='active(menuLink)'>
+                <router-link :class='key' :to="menuLink.path" :key='key'>
+                  <span>{{key}}</span>
+                  <div class='hover-text' v-text='menuLink.text' v-show='menuLink.show'></div>
+                </router-link>
+              </section>
+            </div>
+          </header>
 
-      </div>
+          <main>
+            <transition name="fade">
+              <router-view :posts='photoPosts' :description='description'></router-view>
+            </transition>
+          </main>
+
+        </div>
+      </transition>
+
     </div>
   </div>
 </template>
@@ -49,6 +58,7 @@ export default {
 
   data() {
     return {
+      description: '',
       posts: [],
       socialLinks: {
         fb: {
@@ -94,6 +104,7 @@ export default {
     this.httpGet(tumblr.url, tumblr.key, res=>{
       console.log(res);
       this.posts = res.posts;
+      this.description = res.blog.description;
     });
   },
 
@@ -301,5 +312,10 @@ img.logo {
 
 .fade-enter, .fade-leave-active {
   opacity: 0
+}
+
+
+.invisible {
+  opacity: 0;
 }
 </style>

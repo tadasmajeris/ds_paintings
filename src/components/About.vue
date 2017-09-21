@@ -1,21 +1,22 @@
 <template>
   <div>
     <p>"Your wings are ready." - John Assaraf</p>
-    <section>
-      My name is Dovile Strazdiene and I do abstract art.<br />
-      I am also a wife, a mother of a young boy Tim, a cancer survivor and a positive soul. <br />
-      I love to create colorful paintings, read spiritual books, uplift and inspire others and I am a strong believer in miracles.<br />
-      I am living with my lovely family in a beautiful city of Vilnius - the capital of Lithuania.
-    </section>
+    <section v-html='formatedDescription'></section>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'home',
+  name: 'about',
+  props: ['description'],
   data () {
     return {
       quote: ''
+    }
+  },
+  computed: {
+    formatedDescription() {
+      return this.description.replace(/\n/g, '<br />');
     }
   }
 }
@@ -28,5 +29,9 @@ export default {
     margin-bottom: 25px;
     font-size: 21px;
     font-family: 'Cookie', 'Dancing Script', cursive;
+  }
+  section {
+    max-width: 400px;
+    margin: auto;
   }
 </style>

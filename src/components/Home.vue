@@ -1,6 +1,6 @@
 <template>
   <div>
-    <article v-for='post in posts'>
+    <article v-for='post in posts' class='animated fadeIn'>
       <img :src="post.photos.alt_sizes[4].url"/><br />
       <u v-text="post.summary"></u>
     </article>
